@@ -141,6 +141,7 @@ namespace CeilingFinishNumerator
                             }
                         }
                         roomNumbersList.Sort(new AlphanumComparatorFastString());
+                        roomNamesList = roomNamesList.Distinct().ToList();
                         roomNamesList.Sort(new AlphanumComparatorFastString());
 
                         string roomNumbersByCeilingType = null;
@@ -309,6 +310,7 @@ namespace CeilingFinishNumerator
                             }
 
                             roomNumbersList.Sort(new AlphanumComparatorFastString());
+                            roomNamesList = roomNamesList.Distinct().ToList();
                             roomNamesList.Sort(new AlphanumComparatorFastString());
 
                             string roomNumbersByCeilingType = null;
