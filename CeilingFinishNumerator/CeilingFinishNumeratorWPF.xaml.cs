@@ -8,6 +8,7 @@ namespace CeilingFinishNumerator
     public partial class CeilingFinishNumeratorWPF : Window
     {
         public string CeilingFinishNumberingSelectedName;
+        public bool FillRoomBookParameters;
         public CeilingFinishNumeratorWPF()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace CeilingFinishNumerator
                 .Children.OfType<RadioButton>()
                 .FirstOrDefault(rb => rb.IsChecked.Value == true)
                 .Name;
+            FillRoomBookParameters = (bool)checkBox_fillRoomBookParameters.IsChecked;
             DialogResult = true;
             Close();
         }
@@ -36,6 +38,7 @@ namespace CeilingFinishNumerator
                     .Children.OfType<RadioButton>()
                     .FirstOrDefault(rb => rb.IsChecked.Value == true)
                     .Name;
+                FillRoomBookParameters = (bool)checkBox_fillRoomBookParameters.IsChecked;
                 DialogResult = true;
                 Close();
             }

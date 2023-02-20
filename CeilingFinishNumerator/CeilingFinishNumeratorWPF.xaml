@@ -4,20 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
-             Title="Нумератор потолка" Height="180" Width="300" 
-             MinHeight="180" MinWidth="300" MaxHeight="180" MaxWidth="300"
+             Title="Нумератор потолка" Height="200" Width="300" 
+             MinHeight="200" MinWidth="300" MaxHeight="200" MaxWidth="300"
              WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" KeyDown="CeilingFinishNumeratorWPF_KeyDown">
     <Grid>
-        <GroupBox x:Name="groupBox_CeilingFinishNumbering" Header="Нумерация потолка:" Margin="10,10,10,50">
+        <GroupBox x:Name="groupBox_CeilingFinishNumbering" Header="Нумерация потолка:" Margin="10,10,10,70">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="49*"/>
+                    <ColumnDefinition Width="211*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35*"/>
                     <RowDefinition Height="35*"/>
                 </Grid.RowDefinitions>
-                <RadioButton x:Name="rbt_EndToEndThroughoutTheProject" Content="Сквозная по всему проекту" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" IsChecked="True"/>
-                <RadioButton x:Name="rbt_SeparatedByLevels" Content="С разделением по уровням" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Grid.Row="1"/>
+                <RadioButton x:Name="rbt_EndToEndThroughoutTheProject" Content="Сквозная по всему проекту" HorizontalAlignment="Left" Margin="0" IsChecked="True" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+                <RadioButton x:Name="rbt_SeparatedByLevels" Content="С разделением по уровням" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
+        <CheckBox x:Name="checkBox_fillRoomBookParameters" Content='Заполнить параметры "RoomBook"' Margin="10,0,10,50" VerticalAlignment="Bottom"/>
+        
         <Button x:Name="btn_Ok" Content="Ок" HorizontalAlignment="Right" Margin="0,0,125,10" VerticalAlignment="Bottom" Width="100" Height="25" Click="btn_Ok_Click"/>
         <Button x:Name="btn_Cancel" Content="Отмена" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="100" Height="25" Click="btn_Cancel_Click"/>
     </Grid>

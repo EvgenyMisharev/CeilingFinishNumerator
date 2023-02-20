@@ -18,6 +18,9 @@ namespace CeilingFinishNumerator
         {
             Document doc = commandData.Application.ActiveUIDocument.Document;
 
+            Guid arRoomBookNumberGUID = new Guid("22868552-0e64-49b2-b8d9-9a2534bf0e14");
+            Guid arRoomBookNameGUID = new Guid("b59a22a9-7890-45bd-9f93-a186341eef58");
+
             CeilingFinishNumeratorWPF ceilingFinishNumeratorWPF = new CeilingFinishNumeratorWPF();
             ceilingFinishNumeratorWPF.ShowDialog();
             if (ceilingFinishNumeratorWPF.DialogResult != true)
@@ -25,6 +28,7 @@ namespace CeilingFinishNumerator
                 return Result.Cancelled;
             }
             string ceilingFinishNumberingSelectedName = ceilingFinishNumeratorWPF.CeilingFinishNumberingSelectedName;
+            bool fillRoomBookParameters = ceilingFinishNumeratorWPF.FillRoomBookParameters;
 
             if (ceilingFinishNumberingSelectedName == "rbt_EndToEndThroughoutTheProject")
             {
@@ -87,10 +91,33 @@ namespace CeilingFinishNumerator
                             return Result.Cancelled;
                         }
 
+                        //Очистка параметра "АР_RoomBook_Номер" и "АР_RoomBook_Имя"
+                        if (fillRoomBookParameters)
+                        {
+                            if (ceilingList.First().get_Parameter(arRoomBookNumberGUID) == null)
+                            {
+                                TaskDialog.Show("Revit", "У потолка отсутствует параметр \"АР_RoomBook_Номер\"");
+                                ceilingFinishNumeratorProgressBarWPF.Dispatcher.Invoke(() => ceilingFinishNumeratorProgressBarWPF.Close());
+                                return Result.Cancelled;
+                            }
+                            if (ceilingList.First().get_Parameter(arRoomBookNameGUID) == null)
+                            {
+                                TaskDialog.Show("Revit", "У потолка отсутствует параметр \"АР_RoomBook_Имя\"");
+                                ceilingFinishNumeratorProgressBarWPF.Dispatcher.Invoke(() => ceilingFinishNumeratorProgressBarWPF.Close());
+                                return Result.Cancelled;
+                            }
+                        }
+
                         foreach (Ceiling ceiling in ceilingList)
                         {
                             ceiling.LookupParameter("АР_НомераПомещенийПоТипуПотолка").Set("");
                             ceiling.LookupParameter("АР_ИменаПомещенийПоТипуПотолка").Set("");
+
+                            if (fillRoomBookParameters)
+                            {
+                                ceiling.get_Parameter(arRoomBookNumberGUID).Set("");
+                                ceiling.get_Parameter(arRoomBookNameGUID).Set("");
+                            }
                         }
 
                         List<string> roomNumbersList = new List<string>();
@@ -131,6 +158,18 @@ namespace CeilingFinishNumerator
                                     }
                                     if (intersection != null && intersection.SurfaceArea != 0)
                                     {
+                                        if (fillRoomBookParameters)
+                                        {
+                                            if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                            {
+                                                ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                            }
+                                            if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                            {
+                                                ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                            }
+                                        }
+
                                         if (roomNumbersList.Find(elem => elem == room.Number) == null)
                                         {
                                             roomNumbersList.Add(room.Number);
@@ -299,6 +338,18 @@ namespace CeilingFinishNumerator
                                         }
                                         if (intersection != null && intersection.SurfaceArea != 0)
                                         {
+                                            if (fillRoomBookParameters)
+                                            {
+                                                if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                                }
+                                                if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                }
+                                            }
+
                                             if (roomNumbersList.Find(elem => elem == room.Number) == null)
                                             {
                                                 roomNumbersList.Add(room.Number);
