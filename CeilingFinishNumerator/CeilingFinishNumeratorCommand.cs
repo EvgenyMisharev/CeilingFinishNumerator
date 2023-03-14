@@ -152,7 +152,26 @@ namespace CeilingFinishNumerator
                                     }
                                     catch
                                     {
-                                        Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                        XYZ pointForIntersect = null;
+                                        FaceArray ceilingFaceArray = ceilingSolid.Faces;
+                                        foreach (object planarFace in ceilingFaceArray)
+                                        {
+                                            if (planarFace is PlanarFace && (planarFace as PlanarFace).FaceNormal.IsAlmostEqualTo(XYZ.BasisZ.Negate()))
+                                            {
+                                                List<CurveLoop> curveLoopList = (planarFace as PlanarFace).GetEdgesAsCurveLoops().ToList();
+                                                if (curveLoopList.Count != 0)
+                                                {
+                                                    CurveLoop curveLoop = curveLoopList.First();
+                                                    if (curveLoop != null)
+                                                    {
+                                                        Curve c = curveLoop.First();
+                                                        pointForIntersect = c.GetEndPoint(0);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (pointForIntersect == null) continue;
+                                        Curve curve = Line.CreateBound(pointForIntersect, pointForIntersect - (500 / 304.8) * XYZ.BasisZ) as Curve;
                                         SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
                                         if (curveIntersection.SegmentCount > 0)
                                         {
@@ -198,7 +217,26 @@ namespace CeilingFinishNumerator
                                     }
                                     else
                                     {
-                                        Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                        XYZ pointForIntersect = null;
+                                        FaceArray ceilingFaceArray = ceilingSolid.Faces;
+                                        foreach (object planarFace in ceilingFaceArray)
+                                        {
+                                            if (planarFace is PlanarFace && (planarFace as PlanarFace).FaceNormal.IsAlmostEqualTo(XYZ.BasisZ.Negate()))
+                                            {
+                                                List<CurveLoop> curveLoopList = (planarFace as PlanarFace).GetEdgesAsCurveLoops().ToList();
+                                                if (curveLoopList.Count != 0)
+                                                {
+                                                    CurveLoop curveLoop = curveLoopList.First();
+                                                    if (curveLoop != null)
+                                                    {
+                                                        Curve c = curveLoop.First();
+                                                        pointForIntersect = c.GetEndPoint(0);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (pointForIntersect == null) continue;
+                                        Curve curve = Line.CreateBound(pointForIntersect, pointForIntersect - (500 / 304.8) * XYZ.BasisZ) as Curve;
                                         SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
                                         if (curveIntersection.SegmentCount > 0)
                                         {
@@ -380,7 +418,26 @@ namespace CeilingFinishNumerator
                                         }
                                         catch
                                         {
-                                            Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                            XYZ pointForIntersect = null;
+                                            FaceArray ceilingFaceArray = ceilingSolid.Faces;
+                                            foreach (object planarFace in ceilingFaceArray)
+                                            {
+                                                if (planarFace is PlanarFace && (planarFace as PlanarFace).FaceNormal.IsAlmostEqualTo(XYZ.BasisZ.Negate()))
+                                                {
+                                                    List<CurveLoop> curveLoopList = (planarFace as PlanarFace).GetEdgesAsCurveLoops().ToList();
+                                                    if (curveLoopList.Count != 0)
+                                                    {
+                                                        CurveLoop curveLoop = curveLoopList.First();
+                                                        if (curveLoop != null)
+                                                        {
+                                                            Curve c = curveLoop.First();
+                                                            pointForIntersect = c.GetEndPoint(0);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (pointForIntersect == null) continue;
+                                            Curve curve = Line.CreateBound(pointForIntersect, pointForIntersect - (500 / 304.8) * XYZ.BasisZ) as Curve;
                                             SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
                                             if (curveIntersection.SegmentCount > 0)
                                             {
@@ -426,7 +483,26 @@ namespace CeilingFinishNumerator
                                         }
                                         else
                                         {
-                                            Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                            XYZ pointForIntersect = null;
+                                            FaceArray ceilingFaceArray = ceilingSolid.Faces;
+                                            foreach (object planarFace in ceilingFaceArray)
+                                            {
+                                                if (planarFace is PlanarFace && (planarFace as PlanarFace).FaceNormal.IsAlmostEqualTo(XYZ.BasisZ.Negate()))
+                                                {
+                                                    List<CurveLoop> curveLoopList = (planarFace as PlanarFace).GetEdgesAsCurveLoops().ToList();
+                                                    if (curveLoopList.Count != 0)
+                                                    {
+                                                        CurveLoop curveLoop = curveLoopList.First();
+                                                        if (curveLoop != null)
+                                                        {
+                                                            Curve c = curveLoop.First();
+                                                            pointForIntersect = c.GetEndPoint(0);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (pointForIntersect == null) continue;
+                                            Curve curve = Line.CreateBound(pointForIntersect, pointForIntersect - (500 / 304.8) * XYZ.BasisZ) as Curve;
                                             SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
                                             if (curveIntersection.SegmentCount > 0)
                                             {
