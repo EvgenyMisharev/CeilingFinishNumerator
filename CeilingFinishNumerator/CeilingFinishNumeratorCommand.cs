@@ -4,9 +4,7 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace CeilingFinishNumerator
 {
@@ -154,7 +152,29 @@ namespace CeilingFinishNumerator
                                     }
                                     catch
                                     {
-                                        //ПРОПИСАТЬ ЛОГИКУ СБОРА ОШИБОК!!!!
+                                        Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                        SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
+                                        if (curveIntersection.SegmentCount > 0)
+                                        {
+                                            if (fillRoomBookParameters)
+                                            {
+                                                if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                                }
+                                                if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                }
+                                            }
+
+                                            if (roomNumbersList.Find(elem => elem == room.Number) == null)
+                                            {
+                                                roomNumbersList.Add(room.Number);
+                                                roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                continue;
+                                            }
+                                        }
                                     }
                                     if (intersection != null && intersection.SurfaceArea != 0)
                                     {
@@ -174,6 +194,32 @@ namespace CeilingFinishNumerator
                                         {
                                             roomNumbersList.Add(room.Number);
                                             roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                        SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
+                                        if (curveIntersection.SegmentCount > 0)
+                                        {
+                                            if (fillRoomBookParameters)
+                                            {
+                                                if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                                }
+                                                if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                                {
+                                                    ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                }
+                                            }
+
+                                            if (roomNumbersList.Find(elem => elem == room.Number) == null)
+                                            {
+                                                roomNumbersList.Add(room.Number);
+                                                roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                continue;
+                                            }
                                         }
                                     }
                                 }
@@ -334,7 +380,29 @@ namespace CeilingFinishNumerator
                                         }
                                         catch
                                         {
-                                            //ПРОПИСАТЬ ЛОГИКУ СБОРА ОШИБОК!!!!
+                                            Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                            SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
+                                            if (curveIntersection.SegmentCount > 0)
+                                            {
+                                                if (fillRoomBookParameters)
+                                                {
+                                                    if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                                    {
+                                                        ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                                    }
+                                                    if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                                    {
+                                                        ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                    }
+                                                }
+
+                                                if (roomNumbersList.Find(elem => elem == room.Number) == null)
+                                                {
+                                                    roomNumbersList.Add(room.Number);
+                                                    roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                    continue;
+                                                }
+                                            }
                                         }
                                         if (intersection != null && intersection.SurfaceArea != 0)
                                         {
@@ -354,6 +422,32 @@ namespace CeilingFinishNumerator
                                             {
                                                 roomNumbersList.Add(room.Number);
                                                 roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Curve curve = Line.CreateBound(ceilingSolid.ComputeCentroid(), ceilingSolid.ComputeCentroid() - (500 / 304.8) * XYZ.BasisZ) as Curve;
+                                            SolidCurveIntersection curveIntersection = roomSolid.IntersectWithCurve(curve, new SolidCurveIntersectionOptions());
+                                            if (curveIntersection.SegmentCount > 0)
+                                            {
+                                                if (fillRoomBookParameters)
+                                                {
+                                                    if (ceiling.get_Parameter(arRoomBookNumberGUID) != null)
+                                                    {
+                                                        ceiling.get_Parameter(arRoomBookNumberGUID).Set(room.Number);
+                                                    }
+                                                    if (ceiling.get_Parameter(arRoomBookNameGUID) != null)
+                                                    {
+                                                        ceiling.get_Parameter(arRoomBookNameGUID).Set(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                    }
+                                                }
+
+                                                if (roomNumbersList.Find(elem => elem == room.Number) == null)
+                                                {
+                                                    roomNumbersList.Add(room.Number);
+                                                    roomNamesList.Add(room.get_Parameter(BuiltInParameter.ROOM_NAME).AsString());
+                                                    continue;
+                                                }
                                             }
                                         }
                                     }
