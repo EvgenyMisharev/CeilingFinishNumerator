@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              Title="Нумератор потолка" Height="200" Width="300" 
              MinHeight="200" MinWidth="300" MaxHeight="200" MaxWidth="300"
-             WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen" KeyDown="CeilingFinishNumeratorWPF_KeyDown">
+             WindowStyle="SingleBorderWindow" ResizeMode="NoResize" Icon="Resources/citrus.ico" WindowStartupLocation="CenterScreen" KeyDown="CeilingFinishNumeratorWPF_KeyDown">
     <Grid>
         <GroupBox x:Name="groupBox_CeilingFinishNumbering" Header="Нумерация потолка:" Margin="10,10,10,70">
             <Grid>
