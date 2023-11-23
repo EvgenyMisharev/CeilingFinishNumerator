@@ -3,7 +3,9 @@ using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 
 namespace CeilingFinishNumerator
@@ -14,6 +16,12 @@ namespace CeilingFinishNumerator
         CeilingFinishNumeratorProgressBarWPF ceilingFinishNumeratorProgressBarWPF;
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
+            try
+            {
+                GetPluginStartInfo();
+            }
+            catch { }
+
             Document doc = commandData.Application.ActiveUIDocument.Document;
 
             Guid arRoomBookNumberGUID = new Guid("22868552-0e64-49b2-b8d9-9a2534bf0e14");
@@ -374,7 +382,7 @@ namespace CeilingFinishNumerator
                             if (ceilingList.First().LookupParameter("АР_НомераПомещенийПоТипуПотолка") == null)
                             {
                                 TaskDialog.Show("Revit", "У пола отсутствует параметр экземпляра \"АР_НомераПомещенийПоТипуПотолка\"");
-                                ceilingFinishNumeratorProgressBarWPF.Dispatcher.Invoke(() =>ceilingFinishNumeratorProgressBarWPF.Close());
+                                ceilingFinishNumeratorProgressBarWPF.Dispatcher.Invoke(() => ceilingFinishNumeratorProgressBarWPF.Close());
                                 return Result.Cancelled;
                             }
 
@@ -583,6 +591,27 @@ namespace CeilingFinishNumerator
             ceilingFinishNumeratorProgressBarWPF = new CeilingFinishNumeratorProgressBarWPF();
             ceilingFinishNumeratorProgressBarWPF.Show();
             System.Windows.Threading.Dispatcher.Run();
+        }
+        private static void GetPluginStartInfo()
+        {
+            // Получаем сборку, в которой выполняется текущий код
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            string assemblyName = "CeilingFinishNumerator";
+            string assemblyNameRus = "Нумератор потолка";
+            string assemblyFolderPath = Path.GetDirectoryName(thisAssembly.Location);
+
+            int lastBackslashIndex = assemblyFolderPath.LastIndexOf("\\");
+            string dllPath = assemblyFolderPath.Substring(0, lastBackslashIndex + 1) + "PluginInfoCollector\\PluginInfoCollector.dll";
+
+            Assembly assembly = Assembly.LoadFrom(dllPath);
+            Type type = assembly.GetType("PluginInfoCollector.InfoCollector");
+            var constructor = type.GetConstructor(new Type[] { typeof(string), typeof(string) });
+
+            if (type != null)
+            {
+                // Создание экземпляра класса
+                object instance = Activator.CreateInstance(type, new object[] { assemblyName, assemblyNameRus });
+            }
         }
     }
 }
