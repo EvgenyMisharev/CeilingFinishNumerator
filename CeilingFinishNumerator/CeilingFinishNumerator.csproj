@@ -53,7 +53,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\R2023\</OutputPath>
+    <OutputPath>..\</OutputPath>
     <DefineConstants>DEBUG;R2023</DefineConstants>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AssemblyName>$(AssemblyName)</AssemblyName>
@@ -189,6 +189,7 @@
     <Compile Include="CeilingFinishNumeratorProgressBarWPF.xaml.cs">
       <DependentUpon>CeilingFinishNumeratorProgressBarWPF.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CeilingFinishNumeratorSettings.cs" />
     <Compile Include="CeilingFinishNumeratorWPF.xaml.cs">
       <DependentUpon>CeilingFinishNumeratorWPF.xaml</DependentUpon>
     </Compile>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<CeilingFinishNumeratorSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CeilingFinishNumberingSelectedName>rbt_EndToEndThroughoutTheProject</CeilingFinishNumberingSelectedName>
+  <ProcessSelectedLevel>true</ProcessSelectedLevel>
+  <SeparatedBySections>false</SeparatedBySections>
+  <SelectedLevelName>Уровень 1</SelectedLevelName>
+  <SelectedParameterName>ADSK_Номер секции</SelectedParameterName>
+  <FillRoomBookParameters>false</FillRoomBookParameters>
+</CeilingFinishNumeratorSettings>
